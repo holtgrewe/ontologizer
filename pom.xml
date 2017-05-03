@@ -17,7 +17,8 @@
 
 	<modules>
 		<module>ontologizerlib-core</module>
-		<module>ontologizerlib-io</module>
+        <module>ontologizerlib-io</module>
+        <module>ontologizerlib-immutable</module>
 	</modules>
 
 	<!-- Inherit artifact from SonaType OSS pom.xml Following this article: 
