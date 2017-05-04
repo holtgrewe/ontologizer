@@ -2,6 +2,7 @@ package de.ontologizer.immutable.graph;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.UnmodifiableIterator;
 import de.ontologizer.immutable.graph.impl.ImmutableVertexEdgeList;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,15 +20,20 @@ import java.util.Set;
  * <h3>Construction</h3>
  * 
  * <p>
- * You can use the functions {@link #construct(Collection, Collection, boolean)},
- * {@link #construct(Collection, Collection)}, {@link #construct(Collection, boolean)}, or
- * {@link #construct(Collection)} for constructing the graph from a set of edges (and optionally a
- * set of vertices). Alternative, you can use the {@link Builder} class for iterative construction.
+ * You can use the functions
+ * {@link #construct(Collection, Collection, boolean)},
+ * {@link #construct(Collection, Collection)},
+ * {@link #construct(Collection, boolean)}, or {@link #construct(Collection)}
+ * for constructing the graph from a set of edges (and optionally a set of
+ * vertices). Alternative, you can use the {@link Builder} class for iterative
+ * construction.
  * </p>
  * 
  * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
  */
-public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Vertex> {
+public final class ImmutableDirectedGraph<Vertex>
+		implements
+			DirectedGraph<Vertex> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -43,18 +49,23 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 	}
 
 	/**
-	 * Construct a new {@link ImmutableDirectedGraph} from a collection of vertices and edges.
+	 * Construct a new {@link ImmutableDirectedGraph} from a collection of
+	 * vertices and edges.
 	 * 
 	 * @param vertices
-	 *            {@link Collection} of <code>Vertex</code> objects to use for construction
+	 *            {@link Collection} of <code>Vertex</code> objects to use for
+	 *            construction
 	 * @param edges
-	 *            {@link Collection} of <code>Edge</code> objects to use for construction
+	 *            {@link Collection} of <code>Edge</code> objects to use for
+	 *            construction
 	 * @param checkCompatibility
 	 *            whether or not to check vertex and edge list to be compatible
 	 * @return the built {@link ImmutableDirectedGraph}
 	 */
-	public static <Vertex> ImmutableDirectedGraph<Vertex> construct(Collection<Vertex> vertices,
-			Collection<? extends Edge<Vertex>> edges, boolean checkCompatibility) {
+	public static <Vertex> ImmutableDirectedGraph<Vertex> construct(
+			Collection<Vertex> vertices,
+			Collection<? extends Edge<Vertex>> edges,
+			boolean checkCompatibility) {
 		// Check compatibility if asked for
 		if (checkCompatibility) {
 			checkCompatibility(vertices, edges);
@@ -62,7 +73,8 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 		// Create copy of immutable edges
 		List<ImmutableEdge<Vertex>> immutableEdges = new ArrayList<>();
 		for (Edge<Vertex> edge : edges) {
-			immutableEdges.add(new ImmutableEdge<Vertex>(edge.getSource(), edge.getDest()));
+			immutableEdges.add(new ImmutableEdge<Vertex>(edge.getSource(),
+					edge.getDest()));
 		}
 		return new ImmutableDirectedGraph<Vertex>(vertices, immutableEdges);
 	}
@@ -75,13 +87,15 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 	 * </p>
 	 * 
 	 * @param edges
-	 *            {@link Collection} of <code>Edge</code> objects to use for construction
+	 *            {@link Collection} of <code>Edge</code> objects to use for
+	 *            construction
 	 * @param checkCompatibility
 	 *            whether or not to check vertex and edge list to be compatible
 	 * @return the built {@link ImmutableDirectedGraph}
 	 */
 	public static <Vertex> ImmutableDirectedGraph<Vertex> construct(
-			Collection<? extends Edge<Vertex>> edges, boolean checkCompatibility) {
+			Collection<? extends Edge<Vertex>> edges,
+			boolean checkCompatibility) {
 		// Collect the vertices in the same order as in edges
 		List<Vertex> vertices = new ArrayList<Vertex>();
 		Set<Vertex> vertexSet = new HashSet<Vertex>();
@@ -100,19 +114,22 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 	}
 
 	/**
-	 * Construct a new {@link ImmutableDirectedGraph} from a collection of vertices and edges.
+	 * Construct a new {@link ImmutableDirectedGraph} from a collection of
+	 * vertices and edges.
 	 *
 	 * <p>
 	 * This is just a forward to <code>construct(vertices, edges, false);
 	 * </p>
 	 */
-	public static <Vertex> ImmutableDirectedGraph<Vertex> construct(Collection<Vertex> vertices,
+	public static <Vertex> ImmutableDirectedGraph<Vertex> construct(
+			Collection<Vertex> vertices,
 			Collection<? extends Edge<Vertex>> edges) {
 		return construct(vertices, edges, false);
 	}
 
 	/**
-	 * Construct a new {@link ImmutableDirectedGraph} from a collection of edges.
+	 * Construct a new {@link ImmutableDirectedGraph} from a collection of
+	 * edges.
 	 *
 	 * <p>
 	 * This is just a forward to <code>construct(edges, false);
@@ -124,8 +141,8 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 	}
 
 	/**
-	 * This constructor is used internally for constructing via the static <code>create</code>
-	 * functions.
+	 * This constructor is used internally for constructing via the static
+	 * <code>create</code> functions.
 	 * 
 	 * @param vertices
 	 *            to use for constructing the graph with
@@ -135,25 +152,27 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 	private ImmutableDirectedGraph(Collection<Vertex> vertices,
 			Collection<ImmutableEdge<Vertex>> edges) {
 		// Construct mapping from vertex to builder
-		Map<Vertex, ImmutableVertexEdgeList.Builder<Vertex>> builders =
-				new HashMap<Vertex, ImmutableVertexEdgeList.Builder<Vertex>>();
+		Map<Vertex, ImmutableVertexEdgeList.Builder<Vertex>> builders = new HashMap<Vertex, ImmutableVertexEdgeList.Builder<Vertex>>();
 		for (Vertex v : vertices) {
-			builders.put(v, ImmutableVertexEdgeList.<Vertex> builder());
+			builders.put(v, ImmutableVertexEdgeList.<Vertex>builder());
 		}
 		// Fill edge builders
 		// Fill ImmutableMap builder and construct
-		com.google.common.collect.ImmutableMap.Builder<Vertex, ImmutableVertexEdgeList<Vertex>> builder =
-				ImmutableMap.<Vertex, ImmutableVertexEdgeList<Vertex>> builder();
-		for (Entry<Vertex, ImmutableVertexEdgeList.Builder<Vertex>> e : builders.entrySet()) {
+		com.google.common.collect.ImmutableMap.Builder<Vertex, ImmutableVertexEdgeList<Vertex>> builder = ImmutableMap
+				.<Vertex, ImmutableVertexEdgeList<Vertex>>builder();
+		for (Entry<Vertex, ImmutableVertexEdgeList.Builder<Vertex>> e : builders
+				.entrySet()) {
 			builder.put(e.getKey(), e.getValue().build());
 		}
 	}
 
 	/**
-	 * Check compatibility of <code>vertices</code> and <code>edges</code>, i.e., there must not be
-	 * a vertex in <code>edges</code> that is not present in <code>vertices</code>.
+	 * Check compatibility of <code>vertices</code> and <code>edges</code>,
+	 * i.e., there must not be a vertex in <code>edges</code> that is not
+	 * present in <code>vertices</code>.
 	 * 
-	 * @raises VerticesAndEdgesIncompatibleException in case of incompatibilities.
+	 * @raises VerticesAndEdgesIncompatibleException in case of
+	 *         incompatibilities.
 	 */
 	private static <Vertex> void checkCompatibility(Collection<Vertex> vertices,
 			Collection<? extends Edge<Vertex>> edges) {
@@ -168,7 +187,8 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 						"Unknown dest edge in edge " + edge);
 			}
 			if (edge.getSource() == edge.getDest()) {
-				throw new VerticesAndEdgesIncompatibleException("Self-loop edge " + edge);
+				throw new VerticesAndEdgesIncompatibleException(
+						"Self-loop edge " + edge);
 			}
 		}
 
@@ -184,13 +204,14 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 	 * Not supported.
 	 *
 	 * <p>
-	 * Use {@link MutableDirectedGraph} which allows for adding vertices or use {@link #Builder}.
+	 * Use {@link MutableDirectedGraph} which allows for adding vertices or use
+	 * {@link #Builder}.
 	 * </p>
 	 * 
 	 * @throws UnsupportedOperationException
 	 *             always
-	 * @deprecated Use {@link MutableDirectedGraph} which allows for adding vertices or use
-	 *             {@link #Builder}.
+	 * @deprecated Use {@link MutableDirectedGraph} which allows for adding
+	 *             vertices or use {@link #Builder}.
 	 */
 	@Override
 	@Deprecated
@@ -207,7 +228,8 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 	 * 
 	 * @throws UnsupportedOperationException
 	 *             always
-	 * @deprecated Use {@link MutableDirectedGraph} which allows for removing vertices.
+	 * @deprecated Use {@link MutableDirectedGraph} which allows for removing
+	 *             vertices.
 	 */
 	@Override
 	@Deprecated
@@ -234,13 +256,14 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 	 * Not supported.
 	 *
 	 * <p>
-	 * Use {@link MutableDirectedGraph} which allows for adding edges or use {@link #Builder}.
+	 * Use {@link MutableDirectedGraph} which allows for adding edges or use
+	 * {@link #Builder}.
 	 * </p>
 	 * 
 	 * @throws UnsupportedOperationException
 	 *             always
-	 * @deprecated Use {@link MutableDirectedGraph} which allows for adding edges or use
-	 *             {@link #Builder}.
+	 * @deprecated Use {@link MutableDirectedGraph} which allows for adding
+	 *             edges or use {@link #Builder}.
 	 */
 	@Override
 	@Deprecated
@@ -252,13 +275,14 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 	 * Not supported.
 	 *
 	 * <p>
-	 * Use {@link MutableDirectedGraph} which allows for removing edges or use {@link #Builder}.
+	 * Use {@link MutableDirectedGraph} which allows for removing edges or use
+	 * {@link #Builder}.
 	 * </p>
 	 * 
 	 * @throws UnsupportedOperationException
 	 *             always
-	 * @deprecated Use {@link MutableDirectedGraph} which allows for removing edges or use
-	 *             {@link #Builder}.
+	 * @deprecated Use {@link MutableDirectedGraph} which allows for removing
+	 *             edges or use {@link #Builder}.
 	 */
 	@Override
 	public boolean removeEdgeBetween(Vertex source, Vertex dest) {
@@ -293,8 +317,39 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 
 	@Override
 	public Iterator<? extends Edge<Vertex>> edgeIterator() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return new Iterator<Edge<Vertex>>() {
+			UnmodifiableIterator<ImmutableVertexEdgeList<Vertex>> outerIt = edgeLists
+					.values().iterator();
+			private UnmodifiableIterator<ImmutableEdge<Vertex>> innerIt = null;
+
+			@Override
+			public boolean hasNext() {
+				if (innerIt != null && innerIt.hasNext()) {
+					return true;
+				} else {
+					while (innerIt == null || !innerIt.hasNext()) {
+						if (!outerIt.hasNext()) {
+							return false;
+						} else {
+							innerIt = outerIt.next().getOutEdges().iterator();
+							return innerIt.hasNext();
+						}
+					}
+					return innerIt.hasNext();
+				}
+			}
+
+			@Override
+			public Edge<Vertex> next() {
+				return innerIt.next();
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
+		};
 	}
 
 	@Override
@@ -334,6 +389,7 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 
 			@Override
 			public void remove() {
+				throw new UnsupportedOperationException();
 			}
 		};
 	}
@@ -373,8 +429,10 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 		Iterator<? extends Edge<Vertex>> eIt = edgeIterator();
 		while (eIt.hasNext()) {
 			Edge<Vertex> e = eIt.next();
-			if (argVertexSet.contains(e.getSource()) && argVertexSet.contains(e.getDest())) {
-				edgeSubset.add(new ImmutableEdge<Vertex>(e.getSource(), e.getDest()));
+			if (argVertexSet.contains(e.getSource())
+					&& argVertexSet.contains(e.getDest())) {
+				edgeSubset.add(
+						new ImmutableEdge<Vertex>(e.getSource(), e.getDest()));
 			}
 		}
 
@@ -385,7 +443,8 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 	/**
 	 * Helper class for iteratively constructing immutable directed graphs.
 	 * 
-	 * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+	 * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel
+	 *         Holtgrewe</a>
 	 */
 	public static class Builder<Vertex> {
 
@@ -413,8 +472,8 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 		}
 
 		/**
-		 * Construct and add new {@link ImmutableEdge} between <code>source</code> and
-		 * <code>dest</code>.
+		 * Construct and add new {@link ImmutableEdge} between
+		 * <code>source</code> and <code>dest</code>.
 		 * 
 		 * @param source
 		 *            Source vertex for the directed edge
@@ -429,11 +488,13 @@ public final class ImmutableDirectedGraph<Vertex> implements DirectedGraph<Verte
 		 * Build and return new {@link ImmutableDirectedGraph}.
 		 * 
 		 * @param checkConsistency
-		 *            whether or not to check consistency of vertex and edge list.
+		 *            whether or not to check consistency of vertex and edge
+		 *            list.
 		 * @return freshly built {@link ImmutableDirectedGraph}
 		 */
 		public ImmutableDirectedGraph<Vertex> build(boolean checkConsistency) {
-			return ImmutableDirectedGraph.construct(vertices, edges, checkConsistency);
+			return ImmutableDirectedGraph.construct(vertices, edges,
+					checkConsistency);
 		}
 
 		/**
