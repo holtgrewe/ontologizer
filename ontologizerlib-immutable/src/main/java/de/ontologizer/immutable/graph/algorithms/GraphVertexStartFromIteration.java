@@ -13,12 +13,12 @@ public interface GraphVertexStartFromIteration<Vertex, DirectedGraph> {
 
 	/**
 	 * Start iterating vertices starting from <code>v</code>.
-	 * 
+	 *
 	 * <p>
 	 * {@link VertexVisitor#visit(DirectedGraph, Object)} will be called for
 	 * vertices of the graph starting from <code>v</code>
 	 * </p>
-	 * 
+	 *
 	 * @param g
 	 *            {@link DirectedGraph} to iterate over
 	 * @param <code>Vertex</code>

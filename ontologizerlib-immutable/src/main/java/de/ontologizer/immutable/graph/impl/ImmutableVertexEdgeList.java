@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Implementation detail for storing in- and out-edge lists.
- * 
+ *
  * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
  */
 public final class ImmutableVertexEdgeList<Vertex> {
@@ -36,7 +36,7 @@ public final class ImmutableVertexEdgeList<Vertex> {
 
 	/**
 	 * Internal helper for construction of VertexEdgeList objects.
-	 * 
+	 *
 	 * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
 	 */
 	public static final class Builder<Vertex> {

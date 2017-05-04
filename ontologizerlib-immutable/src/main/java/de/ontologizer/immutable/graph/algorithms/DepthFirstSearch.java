@@ -9,7 +9,7 @@ import java.util.Stack;
 /**
  * Visit vertices of a {@link DirectedGraph} in a depth-first manner
  * (pre-order).
- * 
+ *
  * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
  */
 public class DepthFirstSearch<Vertex, Graph>

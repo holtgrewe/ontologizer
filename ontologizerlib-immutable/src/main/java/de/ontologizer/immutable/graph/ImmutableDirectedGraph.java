@@ -16,9 +16,9 @@ import java.util.Set;
 
 /**
  * Implementation of an immutable directed graph.
- * 
+ *
  * <h3>Construction</h3>
- * 
+ *
  * <p>
  * You can use the functions
  * {@link #construct(Collection, Collection, boolean)},
@@ -28,7 +28,7 @@ import java.util.Set;
  * vertices). Alternative, you can use the {@link Builder} class for iterative
  * construction.
  * </p>
- * 
+ *
  * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
  */
 public final class ImmutableDirectedGraph<Vertex>
@@ -41,7 +41,7 @@ public final class ImmutableDirectedGraph<Vertex>
 
 	/**
 	 * Construct and return a {@link #Builder} helper object.
-	 * 
+	 *
 	 * @return Freshly constructed {@link #Builder} object.
 	 */
 	public static <Vertex> Builder<Vertex> builder() {
@@ -51,7 +51,7 @@ public final class ImmutableDirectedGraph<Vertex>
 	/**
 	 * Construct a new {@link ImmutableDirectedGraph} from a collection of
 	 * vertices and edges.
-	 * 
+	 *
 	 * @param vertices
 	 *            {@link Collection} of <code>Vertex</code> objects to use for
 	 *            construction
@@ -81,11 +81,11 @@ public final class ImmutableDirectedGraph<Vertex>
 
 	/**
 	 * Construct a new {@link ImmutableDirectedGraph} from a collection edges.
-	 * 
+	 *
 	 * <p>
 	 * The edge list is automatically inferred from the edges' vertices.
 	 * </p>
-	 * 
+	 *
 	 * @param edges
 	 *            {@link Collection} of <code>Edge</code> objects to use for
 	 *            construction
@@ -143,7 +143,7 @@ public final class ImmutableDirectedGraph<Vertex>
 	/**
 	 * This constructor is used internally for constructing via the static
 	 * <code>create</code> functions.
-	 * 
+	 *
 	 * @param vertices
 	 *            to use for constructing the graph with
 	 * @param edges
@@ -170,7 +170,7 @@ public final class ImmutableDirectedGraph<Vertex>
 	 * Check compatibility of <code>vertices</code> and <code>edges</code>,
 	 * i.e., there must not be a vertex in <code>edges</code> that is not
 	 * present in <code>vertices</code>.
-	 * 
+	 *
 	 * @raises VerticesAndEdgesIncompatibleException in case of
 	 *         incompatibilities.
 	 */
@@ -207,7 +207,7 @@ public final class ImmutableDirectedGraph<Vertex>
 	 * Use {@link MutableDirectedGraph} which allows for adding vertices or use
 	 * {@link #Builder}.
 	 * </p>
-	 * 
+	 *
 	 * @throws UnsupportedOperationException
 	 *             always
 	 * @deprecated Use {@link MutableDirectedGraph} which allows for adding
@@ -225,7 +225,7 @@ public final class ImmutableDirectedGraph<Vertex>
 	 * <p>
 	 * Use {@link MutableDirectedGraph} which allows for removing vertices.
 	 * </p>
-	 * 
+	 *
 	 * @throws UnsupportedOperationException
 	 *             always
 	 * @deprecated Use {@link MutableDirectedGraph} which allows for removing
@@ -252,6 +252,12 @@ public final class ImmutableDirectedGraph<Vertex>
 		return edgeLists.keySet().iterator();
 	}
 
+	@Override
+	public Collection<Vertex> getVertices() {
+		return edgeLists.keySet();
+	}
+
+
 	/**
 	 * Not supported.
 	 *
@@ -259,7 +265,7 @@ public final class ImmutableDirectedGraph<Vertex>
 	 * Use {@link MutableDirectedGraph} which allows for adding edges or use
 	 * {@link #Builder}.
 	 * </p>
-	 * 
+	 *
 	 * @throws UnsupportedOperationException
 	 *             always
 	 * @deprecated Use {@link MutableDirectedGraph} which allows for adding
@@ -278,7 +284,7 @@ public final class ImmutableDirectedGraph<Vertex>
 	 * Use {@link MutableDirectedGraph} which allows for removing edges or use
 	 * {@link #Builder}.
 	 * </p>
-	 * 
+	 *
 	 * @throws UnsupportedOperationException
 	 *             always
 	 * @deprecated Use {@link MutableDirectedGraph} which allows for removing
@@ -442,7 +448,7 @@ public final class ImmutableDirectedGraph<Vertex>
 
 	/**
 	 * Helper class for iteratively constructing immutable directed graphs.
-	 * 
+	 *
 	 * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel
 	 *         Holtgrewe</a>
 	 */
@@ -453,7 +459,7 @@ public final class ImmutableDirectedGraph<Vertex>
 
 		/**
 		 * Add <code>Vertex</code> to add to the builder.
-		 * 
+		 *
 		 * @param v
 		 *            <code>Vertex</code> to add to the builder.
 		 */
@@ -463,7 +469,7 @@ public final class ImmutableDirectedGraph<Vertex>
 
 		/**
 		 * Add {@link ImmutableEdge} to the builder.
-		 * 
+		 *
 		 * @param e
 		 *            {@link ImmutableEdge} to add to the builder.
 		 */
@@ -474,7 +480,7 @@ public final class ImmutableDirectedGraph<Vertex>
 		/**
 		 * Construct and add new {@link ImmutableEdge} between
 		 * <code>source</code> and <code>dest</code>.
-		 * 
+		 *
 		 * @param source
 		 *            Source vertex for the directed edge
 		 * @param dest
@@ -486,7 +492,7 @@ public final class ImmutableDirectedGraph<Vertex>
 
 		/**
 		 * Build and return new {@link ImmutableDirectedGraph}.
-		 * 
+		 *
 		 * @param checkConsistency
 		 *            whether or not to check consistency of vertex and edge
 		 *            list.

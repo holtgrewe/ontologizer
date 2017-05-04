@@ -12,14 +12,14 @@ public class VersionInfo {
 
 	/**
 	 * Return the version string.
-	 * 
+	 *
 	 * <p>
 	 * This works both from within IDEs such as Eclipse as well as from the
 	 * built JAR file. The used trick is a "project.properties" with the version
 	 * information which allows access to the version information through both
 	 * ways.
 	 * </p>
-	 * 
+	 *
 	 * @return <code>String</code> with the version information, includes
 	 *         <code>-SNAPSHOT</code> suffix on snapshot builds.
 	 */

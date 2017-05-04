@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * Visit vertices of a {@link Graph} in a breadth-first manner (pre-order).
- * 
+ *
  * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
  */
 public class BreadthFirstSearch<Vertex, Graph>

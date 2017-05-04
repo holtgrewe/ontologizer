@@ -41,14 +41,14 @@ public interface Edge<Vertex> extends Serializable {
 
 	/**
 	 * Query for the edge weight.
-	 * 
+	 *
 	 * @return weight of the edge
 	 */
 	public int getWeight();
 
 	/**
 	 * Set the edge weight
-	 * 
+	 *
 	 * @param weight
 	 *            of the edge to set.
 	 */

@@ -7,7 +7,7 @@ import java.util.Set;
 
 /**
  * Visit all vertices of a {@link DirectedGraph} in topological order.
- * 
+ *
  * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
  */
 public class TopologicalSorting<Vertex, Graph>

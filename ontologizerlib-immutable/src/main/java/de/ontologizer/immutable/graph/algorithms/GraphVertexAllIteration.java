@@ -13,12 +13,12 @@ public interface GraphVertexAllIteration<Vertex, DirectedGraph> {
 
 	/**
 	 * Iterate all vertices in topological order.
-	 * 
+	 *
 	 * <p>
 	 * {@link VertexVisitor#visit(DirectedGraph, Object)} will be called for
 	 * vertices of the graph starting from <code>v</code>
 	 * </p>
-	 * 
+	 *
 	 * @param g
 	 *            {@link DirectedGraph} to iterate over
 	 * @param visitor

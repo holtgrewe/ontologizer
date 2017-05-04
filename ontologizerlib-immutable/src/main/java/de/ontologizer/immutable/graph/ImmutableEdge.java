@@ -2,7 +2,7 @@ package de.ontologizer.immutable.graph;
 
 /**
  * Implementation of an immutable edge with default weight of 1.
- * 
+ *
  * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
  */
 public final class ImmutableEdge<Vertex> implements Edge<Vertex> {
@@ -14,7 +14,7 @@ public final class ImmutableEdge<Vertex> implements Edge<Vertex> {
 
 	/**
 	 * Construct <code>ImmutableEdge</code> with the given source and destination vertices.
-	 * 
+	 *
 	 * @param source
 	 *            <code>Vertex</code> to use for the edge foot vertex
 	 * @param dest
@@ -36,7 +36,7 @@ public final class ImmutableEdge<Vertex> implements Edge<Vertex> {
 	 * <p>
 	 * Use {@link MutableEdge} which allows for setting the source vertex.
 	 * </p>
-	 * 
+	 *
 	 * @throws UnsupportedOperationException
 	 *             always
 	 * @deprecated Use {@link MutableEdge} which allows for setting the source vertex.
@@ -56,7 +56,7 @@ public final class ImmutableEdge<Vertex> implements Edge<Vertex> {
 	 * <p>
 	 * Use {@link MutableEdge} which allows for setting the destination vertex.
 	 * </p>
-	 * 
+	 *
 	 * @throws UnsupportedOperationException
 	 *             always
 	 * @deprecated Use {@link MutableEdge} which allows for setting the source vertex.
@@ -78,7 +78,7 @@ public final class ImmutableEdge<Vertex> implements Edge<Vertex> {
 	 * <p>
 	 * Use {@link MutableEdge} which allows for setting the edge weight.
 	 * </p>
-	 * 
+	 *
 	 * @throws UnsupportedOperationException
 	 *             always
 	 * @deprecated Use {@link MutableEdge} which allows for setting the edge weight.
